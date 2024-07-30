@@ -39,17 +39,24 @@ func fazzFood(price int, voucher string, distance int, tax bool) (int, int, int,
 }
 
 func main() {
-	const price int = 25000
-	// const voucer string = "FAZZFOOD50"
-	const voucer string = "DITRAKTIR60"
-	const distance int = 5
+	var price int 
+	fmt.Print("Masukkan Harga : ")
+	fmt.Scanln(&price)
+	
+	var voucer string
+	fmt.Print("Masukkan Voucer : ")
+	fmt.Scanln(&voucer)
+	
+	var distance int
+	fmt.Print("Jarak antar : ")
+	fmt.Scanln(&distance)
 	const tax bool = true
 	
 	var potongan,biayaAntar,pajak,total = fazzFood(price,voucer,distance,tax) 
-
-	fmt.Printf("Harga : %d\n", price)
-	fmt.Printf("Potongan : %d\n", potongan)
-	fmt.Printf("Biaya Antar : %d\n", biayaAntar)
-	fmt.Printf("Pajak : %d\n", pajak)
-	fmt.Printf("Total : %d\n", total)
+	
+	fmt.Printf("Harga 			: %d\n", price)
+	fmt.Printf("Potongan 		: %d\n", potongan)
+	fmt.Printf("Biaya Antar 		: %d\n", biayaAntar)
+	fmt.Printf("Pajak 			: %d\n", pajak)
+	fmt.Printf("Total 			: %d\n", total)
 }
