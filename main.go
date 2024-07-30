@@ -2,17 +2,7 @@ package main
 
 import "fmt"
 
-func fazzFood(price int, voucher string, distance int, tax bool) (int, int, int, int) {
-	var biayaTax int	=	0
-	if tax {
-	 biayaTax = 5 * price /100
-	} 
-
-	var biayaDistance int = 0
-	if distance>2 {
-		biayaDistance = (distance - 2) * 3000 + 5000
-	}
-
+func discound(price int, voucher string) int {
 	var biayaVoucher int = 0
 	if voucher == "FAZZFOOD50" ||voucher == "DITRAKTIR60" {
 		if voucher == "FAZZFOOD50"  {
@@ -32,17 +22,43 @@ func fazzFood(price int, voucher string, distance int, tax bool) (int, int, int,
 			}
 		}
 	}
+	return biayaVoucher
+}
+
+func taxed(price int, tax bool) int {
+	var biayaTax int	=	0
+	if tax {
+	 biayaTax = 5 * price /100
+	} 
+	return biayaTax
+}
+func jarak(distance int) int {
+	var biayaDistance int = 0
+	if distance>2 {
+		biayaDistance = (distance - 2) * 3000 + 5000
+	}
+	return biayaDistance
+}
+
+func fazzFood(price int, voucher string, distance int, tax bool) {
+	biayaVoucher:=discound(price,voucher)
+	biayaTax:=taxed(price,tax)
+	biayaDistance:= jarak(distance)
 
 	var total int = price + biayaTax - biayaVoucher + biayaDistance
 
-	return biayaVoucher, biayaDistance, biayaTax ,total
+	fmt.Printf("Harga 			: %d\n", price)
+	fmt.Printf("Potongan 		: %d\n", biayaVoucher)
+	fmt.Printf("Biaya Antar 		: %d\n", biayaDistance)
+	fmt.Printf("Pajak 			: %d\n", biayaTax)
+	fmt.Printf("Total 			: %d\n", total)
 }
 
 func main() {
 	var price int 
 	fmt.Print("Masukkan Harga : ")
 	fmt.Scanln(&price)
-	
+
 	var voucer string
 	fmt.Print("Masukkan Voucer : ")
 	fmt.Scanln(&voucer)
@@ -52,11 +68,6 @@ func main() {
 	fmt.Scanln(&distance)
 	const tax bool = true
 	
-	var potongan,biayaAntar,pajak,total = fazzFood(price,voucer,distance,tax) 
-	
-	fmt.Printf("Harga 			: %d\n", price)
-	fmt.Printf("Potongan 		: %d\n", potongan)
-	fmt.Printf("Biaya Antar 		: %d\n", biayaAntar)
-	fmt.Printf("Pajak 			: %d\n", pajak)
-	fmt.Printf("Total 			: %d\n", total)
+	fazzFood(price,voucer,distance,tax) 
+
 }
